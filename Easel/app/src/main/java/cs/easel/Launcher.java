@@ -25,7 +25,7 @@ public class Launcher extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        toolbar= (Toolbar) findViewById(R.id.app_bar);
+        //toolbar= (Toolbar) findViewById(R.id.app_bar);
         //setSupportActionBar(toolbar);
     }
 
@@ -35,6 +35,11 @@ public class Launcher extends ActionBarActivity {
         startActivity(intent);
 
     }
+    public void button2OnClick (View v) {
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
