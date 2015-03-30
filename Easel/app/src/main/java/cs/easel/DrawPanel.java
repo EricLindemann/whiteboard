@@ -15,7 +15,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class DrawPanel extends SurfaceView implements SurfaceHolder.Callback{
-    public float xcoord, ycoord;
+    public float xcoord, ycoord, xstart, ystart;
+    public Path src;
+
 
     public DrawPanel(Context context) {
         super(context);
@@ -38,7 +40,8 @@ public class DrawPanel extends SurfaceView implements SurfaceHolder.Callback{
         paint.setAntiAlias(true);
         canvas.drawColor(Color.WHITE);
         paint.setColor(Color.BLACK);
-        canvas.drawCircle(xcoord,ycoord,20,paint);
+        canvas.drawCircle(xcoord,ycoord,10,paint);
+
     }
 
     @Override
