@@ -2,8 +2,6 @@ package cs.easel; /**
  * Created by Devan on 3/5/2015.
  */
 
-import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,14 +12,32 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class DrawPanel extends SurfaceView implements SurfaceHolder.Callback{
-    public float xcoord, ycoord, xstart, ystart;
-    public Path src;
+public class DrawPanel extends SurfaceView {
+    public Path path = new Path();
+    Paint paint = new Paint();
+    SurfaceHolder holder;
 
+
+    //Helper function for creating appropriate path - cosine interpolation
+    //of two adjacent points
+    //TODO: Implement cosine interpolation into the paths below
+    public double cosineInterpolation(double x1, double x2, double normal)
+    {
+        double ft = normal * 3.1415927;
+        double f = (1 - Math.cos(ft)) * .5;
+        return  x1 * (1 - f) + x2 * f;
+    }
 
     public DrawPanel(Context context) {
         super(context);
+        holder = getHolder();
         setWillNotDraw(false);
+        paint.setAntiAlias(true);
+        paint.setDither(true);
+        paint.setColor(Color.BLACK);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeWidth(5f);
     }
 
     public DrawPanel(Context context, AttributeSet attrs, int defStyle) {
@@ -36,38 +52,28 @@ public class DrawPanel extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
+        super.onDraw(canvas);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(20f);
         canvas.drawColor(Color.WHITE);
-        paint.setColor(Color.BLACK);
-        canvas.drawCircle(xcoord,ycoord,10,paint);
-
+        canvas.drawPath(path, paint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        xcoord = event.getX();
-        ycoord = event.getY();
+        float eventX = event.getX();
+        float eventY = event.getY();
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                path.moveTo(eventX, eventY);
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                path.lineTo(eventX, eventY);
+                break;
+            default:
+                return false;
+        }
         invalidate();
         return true;
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-
     }
 }
