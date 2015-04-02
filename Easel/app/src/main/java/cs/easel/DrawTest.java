@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import cs.easel.test;
 
 
 public class DrawTest extends ActionBarActivity {
