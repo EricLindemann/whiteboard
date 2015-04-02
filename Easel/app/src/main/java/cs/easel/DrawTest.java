@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import cs.easel.test;
 
 
@@ -14,7 +16,6 @@ public class DrawTest extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_test);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,5 +37,26 @@ public class DrawTest extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void redButtonOnClick(View view) {
+        DrawPanel.changeRed();
+    }
+
+    public void greenButtonOnClick(View view) {
+        DrawPanel.changeGreen();
+    }
+
+    public void blueButtonOnClick(View view) {
+        DrawPanel.changeBlue();
+    }
+
+    public void blackButtonOnClick(View view) {
+        DrawPanel.changeBlack();
+    }
+
+    public void eraseButtonOnClick(View view) {
+        DrawPanel.erase();
     }
 }

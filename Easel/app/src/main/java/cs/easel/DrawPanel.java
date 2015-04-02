@@ -11,18 +11,20 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class DrawPanel extends SurfaceView {
-    ArrayList<Path> paths = new ArrayList<>();
-    ArrayList<Integer> colors = new ArrayList<>();
-    ArrayList<Float> sizes = new ArrayList<>();
+    ArrayList<Path> paths = new ArrayList<Path>();
+    ArrayList<Integer> colors = new ArrayList<Integer>();
+    ArrayList<Float> sizes = new ArrayList<Float>();
     public Path path = new Path();
     Paint paint = new Paint();
     Float currentSize = 20f;
-    int currentColor = Color.BLACK;
+    static int currentColor = Color.BLACK;
+    static boolean erase = false;
 
 
     //Helper function for creating appropriate path - cosine interpolation
@@ -50,6 +52,25 @@ public class DrawPanel extends SurfaceView {
         setWillNotDraw(false);
     }
 
+    public static void changeBlack() {
+        currentColor = Color.BLACK;
+    }
+
+    public static void changeRed() {
+        currentColor = Color.RED;
+    }
+
+    public static void changeGreen() {
+        currentColor = Color.GREEN;
+    }
+
+    public static void changeBlue() {
+        currentColor = Color.BLUE;
+    }
+
+    public static void erase(){
+        erase = true;
+    }
 
     //TODO: Find how to set the paint size and color at object initialization - this is wasting a lot of time changing color for no reason
     @Override
@@ -57,12 +78,16 @@ public class DrawPanel extends SurfaceView {
         super.onDraw(canvas);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawColor(Color.WHITE);
-        currentColor = paint.getColor();
+        //currentColor = paint.getColor();
         paint.setStrokeWidth(20f);
         for(int i = 0; i < paths.size(); ++i) {
             paint.setColor(colors.get(i));
             paint.setStrokeWidth(sizes.get(i));
             canvas.drawPath(paths.get(i), paint);
+            if (erase){
+                canvas.drawColor(Color.WHITE);
+                erase = false;
+            }
         }
         paint.setColor(currentColor);
         paint.setStrokeWidth(currentSize);
@@ -83,8 +108,8 @@ public class DrawPanel extends SurfaceView {
                 break;
             case MotionEvent.ACTION_UP:
                 paths.add(path);
-                Random rnd = new Random();
-                paint.setARGB(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                //Random rnd = new Random();
+                //paint.setARGB(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 colors.add(paint.getColor());
                 sizes.add(paint.getStrokeWidth());
                 path = new Path();

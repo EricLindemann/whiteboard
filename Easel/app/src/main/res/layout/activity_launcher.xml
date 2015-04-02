@@ -26,7 +26,6 @@
         android:nestedScrollingEnabled="true"
         android:onClick="buttonOnClick"
         android:id="@+id/button"
-        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         />

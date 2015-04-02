@@ -3,6 +3,10 @@
     <color name= "primaryColor">#673ab7</color>
     <color name= "primaryColorDark">#4f2317</color>
     <color name= "accentColor">#bad1cd</color>
-
-
+    <color name= "red">#FF0000</color>
+    <color name= "green">#008000</color>
+    <color name= "blue">#0000FF</color>
+    <color name= "black">#000000</color>
+    <color name= "White">#FFFFFF</color>
+    <color name= "silver">#C0C0C0</color>
 </resources>
