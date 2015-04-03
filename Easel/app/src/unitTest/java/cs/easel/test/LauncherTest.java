@@ -1,6 +1,7 @@
 package cs.easel.test;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ActivityUnitTestCase;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -28,13 +29,19 @@ public class LauncherTest extends ActivityInstrumentationTestCase2<Launcher> {
         assertNotNull(button);
     }
 
+    public void testDrawButtonClick(){
+
+
+    }
+
     public void testButton2NotNull(){
         Button button2 = (Button) activity.findViewById(R.id.button);
         assertNotNull(button2);
     }
 
-    public void testImageViewNotNull(){
-       // ImageView imageView = (ImageView) activity.findViewById(R.id.imageView);
-        //assertNotNull(imageView);
-    }
+    /*public void testImageViewNotNull(){
+        ImageView imageView = (ImageView) activity.findViewById(R.id.imageView);
+        assertNotNull(imageView);
+    }*/
+
 }

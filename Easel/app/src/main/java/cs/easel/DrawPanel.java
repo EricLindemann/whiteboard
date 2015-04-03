@@ -23,7 +23,7 @@ public class DrawPanel extends SurfaceView {
     public Path path = new Path();
     Paint paint = new Paint();
     Float currentSize = 20f;
-    static int currentColor = Color.BLACK;
+    public static int currentColor = Color.BLACK;
     static boolean erase = false;
 
 
