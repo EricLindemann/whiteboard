@@ -29,11 +29,6 @@ public class LauncherTest extends ActivityInstrumentationTestCase2<Launcher> {
         assertNotNull(button);
     }
 
-    public void testDrawButtonClick(){
-
-
-    }
-
     public void testButton2NotNull(){
         Button button2 = (Button) activity.findViewById(R.id.button);
         assertNotNull(button2);

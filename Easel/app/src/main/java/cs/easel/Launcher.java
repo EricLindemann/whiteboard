@@ -2,18 +2,16 @@ package cs.easel;/**
  * Created by Eric Lindemann on 3/29/2015
  */
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 
-public class Launcher extends ActionBarActivity {
+public class Launcher extends Activity {
 
     public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
 
@@ -25,8 +23,7 @@ public class Launcher extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        //toolbar= (Toolbar) findViewById(R.id.app_bar);
-        //setSupportActionBar(toolbar);
+
     }
 
     public void buttonOnClick (View v) {
@@ -36,7 +33,7 @@ public class Launcher extends ActionBarActivity {
 
     }
     public void button2OnClick (View v) {
-        android.os.Process.killProcess(android.os.Process.myPid());
+        finish();
     }
 
 

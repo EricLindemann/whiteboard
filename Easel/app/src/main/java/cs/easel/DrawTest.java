@@ -1,5 +1,6 @@
 package cs.easel;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,7 +9,8 @@ import android.view.View;
 
 
 
-public class DrawTest extends ActionBarActivity {
+public class DrawTest extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
