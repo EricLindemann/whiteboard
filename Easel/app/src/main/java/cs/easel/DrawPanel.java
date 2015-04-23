@@ -52,6 +52,7 @@ public class DrawPanel extends SurfaceView {
         setWillNotDraw(false);
     }
 
+    /** */
     public static void changeBlack() {
         currentColor = Color.BLACK;
     }

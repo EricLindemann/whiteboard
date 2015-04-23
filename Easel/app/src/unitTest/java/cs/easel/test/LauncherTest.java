@@ -34,9 +34,9 @@ public class LauncherTest extends ActivityInstrumentationTestCase2<Launcher> {
         assertNotNull(button2);
     }
 
-    /*public void testImageViewNotNull(){
+    public void testImageViewNotNull(){
         ImageView imageView = (ImageView) activity.findViewById(R.id.imageView);
         assertNotNull(imageView);
-    }*/
+    }
 
 }
