@@ -23,6 +23,9 @@ public class LauncherTest extends ActivityInstrumentationTestCase2<Launcher> {
         super.setUp();
         activity = getActivity();
     }
+    /* Commented this portion out because I deleted the "Draw" button.
+       Think it's better UI design to just click easeL logo to go to
+       the draw screen - Raymond
 
     public void testButtonNotNull(){
         Button button = (Button) activity.findViewById(R.id.button);
@@ -32,7 +35,7 @@ public class LauncherTest extends ActivityInstrumentationTestCase2<Launcher> {
     public void testButton2NotNull(){
         Button button2 = (Button) activity.findViewById(R.id.button);
         assertNotNull(button2);
-    }
+    } */
 
     public void testImageViewNotNull(){
         ImageView imageView = (ImageView) activity.findViewById(R.id.imageView);

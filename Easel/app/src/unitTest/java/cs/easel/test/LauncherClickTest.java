@@ -18,6 +18,9 @@ public class LauncherClickTest extends ActivityUnitTestCase<Launcher> {
         super(Launcher.class);
     }
 
+    /* Commented this portion out because I deleted the "Draw" button.
+       Think it's better UI design to just click easeL logo to go to
+       the draw screen - Raymond
 
     public void testDrawTestWasLaunchedOnClick(){
         final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(), Launcher.class);
@@ -28,7 +31,7 @@ public class LauncherClickTest extends ActivityUnitTestCase<Launcher> {
         assertNotNull(launchIntent);
 
 
-    }
+    } */
 
     public void testExit(){
         final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(),Launcher.class);
