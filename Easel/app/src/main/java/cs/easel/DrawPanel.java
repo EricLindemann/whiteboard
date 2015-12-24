@@ -2,17 +2,21 @@ package cs.easel; /**
  * Created by Devan on 3/5/2015.
  */
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.content.Context;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -91,6 +95,31 @@ public class DrawPanel extends SurfaceView {
         paint.setStrokeWidth(currentSize);
         canvas.drawPath(path, paint);
     }
+
+    public void screenGrab(){
+
+        Bitmap image = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(image);
+        this.onDraw(canvas);
+
+        String path= Environment.getExternalStorageDirectory() + "/test .png";
+        File file = new File(path);
+
+        try{
+
+            file.createNewFile();
+            FileOutputStream ostream = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.PNG, 100, ostream);
+            ostream.flush();
+            ostream.close();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

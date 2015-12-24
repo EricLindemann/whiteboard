@@ -2,13 +2,24 @@ package cs.easel;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 
 public class DrawTest extends Activity {
@@ -63,6 +74,12 @@ public class DrawTest extends Activity {
         Intent intent = new Intent(this, DrawTest.class);
         startActivity(intent);
         finish();
+    }
+
+    public void saveButtonOnClick (View view) {
+        DrawPanel newPanel = new DrawPanel(this);
+        newPanel.screenGrab();
+
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
