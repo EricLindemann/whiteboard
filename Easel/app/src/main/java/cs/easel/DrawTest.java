@@ -1,8 +1,10 @@
 package cs.easel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +60,21 @@ public class DrawTest extends Activity {
     }
 
     public void eraseButtonOnClick(View view) {
-        DrawPanel.erase();
+        Intent intent = new Intent(this, DrawTest.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    Intent intent = new Intent(this, Launcher.class);
+                    finish();
+                    startActivity(intent);
+            }
+
+        }
+        return true;
     }
 }

@@ -62,16 +62,13 @@ public class DrawPanel extends SurfaceView {
     }
 
     public static void changeGreen() {
-        currentColor = Color.GREEN;
+        currentColor = Color.rgb(0,128,0);
     }
 
     public static void changeBlue() {
         currentColor = Color.BLUE;
     }
 
-    public static void erase(){
-        erase = true;
-    }
 
     //TODO: Find how to set the paint size and color at object initialization - this is wasting a lot of time changing color for no reason
     @Override

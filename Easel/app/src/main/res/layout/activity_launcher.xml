@@ -14,8 +14,6 @@
         android:maxHeight="200dp"
         android:scaleType="fitCenter"
         android:layout_marginTop="123dp"
-        android:clickable="true"
-        android:onClick="buttonOnClick"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/button2" />
 
@@ -23,11 +21,21 @@
     <Button
         android:layout_width="144dp"
         android:layout_height="48dp"
-        android:text="Exit"
-        android:id="@+id/button2"
-        android:onClick="button2OnClick"
+        android:text="Draw"
+        android:id="@+id/drawButton"
+        android:onClick="drawButtonOnClick"
         android:layout_marginTop="39dp"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:text="Exit"
+        android:id="@+id/button2"
+        android:onClick="button2OnClick"
+        android:layout_marginTop="6dp"
+        android:layout_below="@+id/drawButton"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

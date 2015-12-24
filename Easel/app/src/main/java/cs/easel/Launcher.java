@@ -26,13 +26,14 @@ public class Launcher extends Activity {
 
     }
 
-    public void buttonOnClick (View v) {
+    public void drawButtonOnClick (View v) {
 
         Intent intent = new Intent(Launcher.this, DrawTest.class);
         startActivity(intent);
 
     }
     public void button2OnClick (View v) {
+        System.exit(0);
         finish();
     }
 
