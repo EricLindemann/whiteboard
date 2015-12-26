@@ -16,6 +16,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.larswerkman.holocolorpicker.ColorPicker;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class DrawPanel extends View {
     static boolean erase = false;
     public static Canvas myCanvas;
     Bitmap scaled;
+    public static boolean isPicker = false;
 
 
     //Helper function for creating appropriate path - cosine interpolation
@@ -62,25 +65,9 @@ public class DrawPanel extends View {
         setWillNotDraw(false);
     }
 
-    /** */
-    public static void changeBlack() {
+    public static void changeColor(int color) {
         currentSize = 20f;
-        currentColor = Color.BLACK;
-    }
-
-    public static void changeRed() {
-        currentSize = 20f;
-        currentColor = Color.RED;
-    }
-
-    public static void changeGreen() {
-        currentSize = 20f;
-        currentColor = Color.rgb(0,128,0);
-    }
-
-    public static void changeBlue() {
-        currentSize = 20f;
-        currentColor = Color.BLUE;
+        currentColor = color;
     }
 
     public static void changeEraser() {
@@ -91,56 +78,27 @@ public class DrawPanel extends View {
 
 
 
-
     //TODO: Find how to set the paint size and color at object initialization - this is wasting a lot of time changing color for no reason
     @Override
     public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        paint.setStyle(Paint.Style.STROKE);
-        canvas.drawColor(Color.WHITE);
-        //currentColor = paint.getColor();
-        paint.setStrokeWidth(20f);
-        for(int i = 0; i < paths.size(); ++i) {
-            paint.setColor(colors.get(i));
-            paint.setStrokeWidth(sizes.get(i));
-            canvas.drawPath(paths.get(i), paint);
-            if (erase){
-                canvas.drawColor(Color.WHITE);
-                erase = false;
+        if (!isPicker) {
+            super.onDraw(canvas);
+            paint.setStyle(Paint.Style.STROKE);
+            canvas.drawColor(Color.WHITE);
+            for(int i = 0; i < paths.size(); ++i) {
+                paint.setColor(colors.get(i));
+                paint.setStrokeWidth(sizes.get(i));
+                canvas.drawPath(paths.get(i), paint);
+
             }
+            paint.setColor(currentColor);
+            paint.setStrokeWidth(currentSize);
+            canvas.drawPath(path, paint);
         }
-        paint.setColor(currentColor);
-        paint.setStrokeWidth(currentSize);
-        canvas.drawPath(path, paint);
+
+
+
     }
-
-
-
-
-
-/*
-        Bitmap image = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(image);
-        this.draw(canvas);
-
-        String path= Environment.getExternalStorageDirectory() + "/test .png";
-        File file = new File(path);
-
-        try{
-
-            file.createNewFile();
-            FileOutputStream ostream = new FileOutputStream(file);
-            image.compress(Bitmap.CompressFormat.PNG, 100, ostream);
-            ostream.flush();
-            ostream.close();
-            System.out.println("saved test.png");
-
-        }catch (Exception e){
-
-            e.printStackTrace();
-        }
-    }*/
 
 
     @Override

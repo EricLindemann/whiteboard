@@ -16,37 +16,15 @@ public class DrawTestClickTest extends ActivityUnitTestCase<DrawTest> {
 
     public DrawTestClickTest() {super (DrawTest.class);}
 
-    public void testRedButtonChangeOnClick() {
-        final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(), DrawTest.class);
-        startActivity(mLaunchIntent,null,null);
-        final Button launchNextButton = (Button)getActivity().findViewById(R.id.redButton);
-        launchNextButton.performClick();
-        assertEquals(Color.RED, DrawPanel.currentColor);
-    }
 
-    public void testBlueButtonChangeOnClick() {
-        final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(), DrawTest.class);
-        startActivity(mLaunchIntent,null,null);
-        final Button launchNextButton = (Button)getActivity().findViewById(R.id.blueButton);
-        launchNextButton.performClick();
-        assertEquals(Color.BLUE, DrawPanel.currentColor);
-    }
-
-    public void testGreenButtonChangeOnClick() {
-        final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(), DrawTest.class);
-        startActivity(mLaunchIntent,null,null);
-        final Button launchNextButton = (Button)getActivity().findViewById(R.id.greenButton);
-        launchNextButton.performClick();
-        assertEquals(Color.GREEN, DrawPanel.currentColor);
-    }
-
+/*
     public void testBlackButtonChangeOnClick() {
         final Intent mLaunchIntent = new Intent(getInstrumentation().getTargetContext(), DrawTest.class);
         startActivity(mLaunchIntent,null,null);
-        final Button launchNextButton = (Button)getActivity().findViewById(R.id.blackButton);
+        final Button launchNextButton = (Button)getActivity().findViewById(R.id.colorButton);
         launchNextButton.performClick();
         assertEquals(Color.BLACK, DrawPanel.currentColor);
-    }
+    }*/
 
 
 }

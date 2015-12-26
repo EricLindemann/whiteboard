@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.holocolorpicker.SVBar;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,6 +40,17 @@ public class DrawTest extends Activity {
         setContentView(R.layout.activity_draw_test);
         View myPanel = findViewById(R.id.view);
         myPanel.setDrawingCacheEnabled(true);
+        ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
+        picker.setShowOldCenterColor(false);
+
+        picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
+            @Override
+            public void onColorChanged(int color) {
+                DrawPanel.changeColor(color);
+                System.out.println(color);
+
+            }
+        });
     }
 
     @Override
@@ -62,21 +76,20 @@ public class DrawTest extends Activity {
     }
 
 
-    public void redButtonOnClick(View view) {
-        DrawPanel.changeRed();
+
+    public void colorButtonOnClick(View view) {
+        ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
+        picker.setShowOldCenterColor(false);
+        if (picker.getVisibility() == View.GONE) {
+            DrawPanel.isPicker = true;
+            picker.setVisibility(View.VISIBLE);
+        } else {
+            picker.setVisibility(View.GONE);
+            DrawPanel.isPicker = false;
+        }
+        System.out.println(picker.getColor());
     }
 
-    public void greenButtonOnClick(View view) {
-        DrawPanel.changeGreen();
-    }
-
-    public void blueButtonOnClick(View view) {
-        DrawPanel.changeBlue();
-    }
-
-    public void blackButtonOnClick(View view) {
-        DrawPanel.changeBlack();
-    }
 
     public void eraserButtonOnClick(View view) { DrawPanel.changeEraser(); }
 
