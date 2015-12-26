@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,6 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class DrawTest extends Activity {
@@ -29,6 +35,8 @@ public class DrawTest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_test);
+        View myPanel = findViewById(R.id.view);
+        myPanel.setDrawingCacheEnabled(true);
     }
 
     @Override
@@ -70,28 +78,59 @@ public class DrawTest extends Activity {
         DrawPanel.changeBlack();
     }
 
+    public void eraserButtonOnClick(View view) { DrawPanel.changeEraser(); }
+
     public void eraseButtonOnClick(View view) {
         Intent intent = new Intent(this, DrawTest.class);
         startActivity(intent);
         finish();
     }
 
-    public void saveButtonOnClick (View view) {
-        DrawPanel newPanel = new DrawPanel(this);
-        newPanel.screenGrab();
+    public void saveButtonOnClick (View view) throws IOException {
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "Easel");
 
-    }
+        View myPanel = findViewById(R.id.view);
+        Bitmap nBitmap = myPanel.getDrawingCache();
+        Canvas canvas = new Canvas(nBitmap);
+        myPanel.draw(canvas);
+        System.out.println(canvas);
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_BACK:
-                    Intent intent = new Intent(this, Launcher.class);
-                    finish();
-                    startActivity(intent);
+        try {
+            if (!mediaStorageDir.exists()) {
+                mediaStorageDir.mkdirs();
             }
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+                    .format(new Date());
+            File mediaFile = new File(mediaStorageDir.getPath()
+                    + File.separator + "drawing" + timeStamp + ".png");
+            FileOutputStream out = new FileOutputStream(mediaFile);
 
+            nBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+
+
+            // Update gallery
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri contentUri = Uri.fromFile(mediaFile);
+            mediaScanIntent.setData(contentUri);
+            getApplicationContext().sendBroadcast(mediaScanIntent);
+
+            Toast.makeText(this, "Drawing saved to: /Pictures/Easel/drawing" + timeStamp + ".png",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Not saved",
+                    Toast.LENGTH_SHORT).show();
         }
-        return true;
+
     }
+
+
+
+
 }
+

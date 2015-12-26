@@ -8,7 +8,7 @@
     <cs.easel.DrawPanel
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/surfaceView"
+        android:id="@+id/view"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:paddingTop="16dp"
@@ -23,19 +23,19 @@
         android:background="@color/red"
         android:onClick="redButtonOnClick"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/blackButton"
-        android:layout_marginStart="45dp" />
+        android:layout_marginLeft="1dp"
+        android:layout_toEndOf="@+id/blackButton"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/greenButton"
+        android:layout_marginLeft="1dp"
         android:background="@color/green"
         android:onClick="greenButtonOnClick"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/blueButton"
-        android:layout_marginEnd="51dp" />
+        android:layout_above="@+id/view"
+        android:layout_toEndOf="@+id/redButton"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -44,8 +44,9 @@
         android:id="@+id/blueButton"
         android:background="@color/blue"
         android:onClick="blueButtonOnClick"
-        android:layout_above="@+id/surfaceView"
-        android:layout_alignEnd="@+id/surfaceView" />
+        android:layout_above="@+id/view"
+        android:layout_toEndOf="@+id/greenButton"
+        android:layout_marginLeft="1dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -59,23 +60,36 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Erase"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
         android:id="@+id/eraseButton"
         android:onClick="eraseButtonOnClick"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:background="@drawable/delete"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/saveButton"
+        android:layout_marginRight="1dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
         android:id="@+id/saveButton"
         android:onClick="saveButtonOnClick"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@drawable/save"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/view" />
+
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:onClick="eraserButtonOnClick"
+        android:layout_marginRight="1dp"
+        android:id="@+id/eraserButton"
+        android:background="@drawable/eraser"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/eraseButton" />
 
 
 </RelativeLayout>

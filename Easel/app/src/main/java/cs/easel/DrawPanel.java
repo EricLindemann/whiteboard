@@ -14,21 +14,27 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
-public class DrawPanel extends SurfaceView {
+public class DrawPanel extends View {
     ArrayList<Path> paths = new ArrayList<Path>();
     ArrayList<Integer> colors = new ArrayList<Integer>();
     ArrayList<Float> sizes = new ArrayList<Float>();
     public Path path = new Path();
     Paint paint = new Paint();
-    Float currentSize = 20f;
+    public static float currentSize = 20f;
     public static int currentColor = Color.BLACK;
     static boolean erase = false;
+    public static Canvas myCanvas;
+    Bitmap scaled;
 
 
     //Helper function for creating appropriate path - cosine interpolation
@@ -58,20 +64,32 @@ public class DrawPanel extends SurfaceView {
 
     /** */
     public static void changeBlack() {
+        currentSize = 20f;
         currentColor = Color.BLACK;
     }
 
     public static void changeRed() {
+        currentSize = 20f;
         currentColor = Color.RED;
     }
 
     public static void changeGreen() {
+        currentSize = 20f;
         currentColor = Color.rgb(0,128,0);
     }
 
     public static void changeBlue() {
+        currentSize = 20f;
         currentColor = Color.BLUE;
     }
+
+    public static void changeEraser() {
+        currentSize = 70f;
+        currentColor = Color.WHITE;
+    }
+
+
+
 
 
     //TODO: Find how to set the paint size and color at object initialization - this is wasting a lot of time changing color for no reason
@@ -96,12 +114,15 @@ public class DrawPanel extends SurfaceView {
         canvas.drawPath(path, paint);
     }
 
-    public void screenGrab(){
 
-        Bitmap image = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+
+
+
+/*
+        Bitmap image = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(image);
-        this.onDraw(canvas);
+        this.draw(canvas);
 
         String path= Environment.getExternalStorageDirectory() + "/test .png";
         File file = new File(path);
@@ -113,12 +134,13 @@ public class DrawPanel extends SurfaceView {
             image.compress(Bitmap.CompressFormat.PNG, 100, ostream);
             ostream.flush();
             ostream.close();
+            System.out.println("saved test.png");
 
         }catch (Exception e){
 
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     @Override
