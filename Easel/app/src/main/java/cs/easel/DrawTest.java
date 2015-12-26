@@ -47,7 +47,6 @@ public class DrawTest extends Activity {
             @Override
             public void onColorChanged(int color) {
                 DrawPanel.changeColor(color);
-                System.out.println(color);
 
             }
         });
@@ -87,7 +86,6 @@ public class DrawTest extends Activity {
             picker.setVisibility(View.GONE);
             DrawPanel.isPicker = false;
         }
-        System.out.println(picker.getColor());
     }
 
 
@@ -109,8 +107,6 @@ public class DrawTest extends Activity {
         Bitmap nBitmap = myPanel.getDrawingCache();
         Canvas canvas = new Canvas(nBitmap);
         myPanel.draw(canvas);
-        System.out.println(canvas);
-
         try {
             if (!mediaStorageDir.exists()) {
                 mediaStorageDir.mkdirs();
